@@ -15,40 +15,72 @@
             }
     
         </style>
-        
     </head>
     <body>
     
         <div align="center"> 
-            <form >
+            <form id="dateform">
                 <label for="date" style="font-size:50pt;color: white;">Your Birthday:</label>
                 <br>
                 <input style="background-color: #e7ec58;height:50px;width:250px;font-size:14pt;text-align: center;" type="date" id="date_input" name="date" value="type here">
                 <br>
                 <br>
                <!---- <input style="height:50px;width:120px;font-size:14pt;text-align: center;" type="button" onclick="dummy()">-->
-               <button type="button" style="background-color: #5dec58; height:50px;width:120px;font-size:14pt;text-align: center;" onclick="dummy(), place(), known_for()">Click Me!</button>
+               <button type="button" style="background-color: #15e60e; height:50px;width:120px;font-size:14pt;text-align: center;" onclick="dummy()">Click Me!</button>
             </form> 
             <br><br><br>
-            <p id="example"> </p>
-            <p id="country"> </p>
-            <p id="speciality"> </p>
-            <iframe style="width: 80vw; height: 50vh; border: none;" src="https://query.wikidata.org/embed.html#SELECT%20DISTINCT%20%3Fitem%20%3FitemLabel%20%3Fdate_of_birth%20%3Fplace_of_birthLabel%20%3Fawards%20%3FawardsLabel%20%3Fimage%20%3Foccupation%20%3FoccupationLabel%20WHERE%20%7B%0A%20%20%3Fitem%20wdt%3AP31%20wd%3AQ5%3B%0A%20%20%20%20wdt%3AP27%20wd%3AQ668.%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22%5BAUTO_LANGUAGE%5D%2Cen%22.%20%7D%0A%20%20OPTIONAL%20%7B%20%3Fitem%20wdt%3AP569%20%3Fdate_of_birth.%20%7D%0A%20%20OPTIONAL%20%7B%20%3Fitem%20wdt%3AP19%20%3Fplace_of_birth.%20%7D%0A%20%20OPTIONAL%20%7B%20%3Fitem%20wdt%3AP166%20%3Fawards.%20%7D%0A%20%20OPTIONAL%20%7B%20%3Fitem%20wdt%3AP18%20%3Fimage.%20%7D%0A%20%20FILTER(%3Fawards%20IN(wd%3AQ932650%2C%20wd%3AQ322132%2C%20wd%3AQ672392%2C%20wd%3AQ949193%2C%20wd%3AQ1650629%2C%20wd%3AQ2684997%2C%20wd%3AQ671622))%0A%20%20FILTER((MONTH(%3Fdate_of_birth))%20%3D%2010%20)%0A%20%20FILTER((DAY(%3Fdate_of_birth))%20%3D%2021%20)%0A%20%20OPTIONAL%20%7B%20%3Fitem%20wdt%3AP106%20%3Foccupation.%20%7D%0A%7D%0ALIMIT%205" referrerpolicy="origin" sandbox="allow-scripts allow-same-origin allow-popups"></iframe>
+       
+            <p id="days" style="font-size:20pt;color: white;" > </p>
+          
+
             <script>
             function dummy() {
             //   let xyz = document.getElementById("date_input").innerHTML
             //alert(xyz) 
-            document.getElementById("example").innerHTML="<p style=\"font-size:20pt;color: white;\"> Mr._______ was born on your birthday too! <p>"
-            }
-            function place () {
-                document.getElementById("country").innerHTML="<p style=\"font-size:20pt; color:white;\"> He is from ___________. <p>" 
-            }
-            function known_for (){
-                document.getElementById ("speciality"). innerHTML= "<p style=\"font-size: 20pt; color:white;\"> He is known for ____________.<p>"
-            }
+                
+                // determine today's date 
+                // determine if birthday is over this year
+                // find out how many days till next birthday 
+                // then fill the value of x 
             
+         
+
+                var form = document.getElementById("dateform");
+                var enteredDate = form.elements[0].value;
+                var inputDate = new Date (enteredDate)
+                var today = new Date ();
+                var difference = today - inputDate;
+                var no_mil_in_day = 86400000;
+                var daysElapsed = Math. trunc(difference/no_mil_in_day) ;
+
+    
+                
+                //document.getElementById("example").innerHTML="<p style=\"font-size:20pt;color: white;\"> Your next birthday is x days away <p>";
+                
+                console.log(enteredDate)
+                console.log(inputDate)
+                console.log(difference)
+                console.log(daysElapsed)
+
+                if (daysElapsed<0 ) {
+
+                    document.getElementById("days").innerHTML="Oh you were born in the future I see! What happens in the future?" 
+
+                }else{ 
+                    
+                    document.getElementById("days").innerHTML= "You are " + daysElapsed + " days old." ;
+                    
+                }
+                
+            }
+             
+                      
             </script>
         </div>
     </body>
+
+  
+
+
     </html>
     
